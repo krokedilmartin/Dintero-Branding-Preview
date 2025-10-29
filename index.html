@@ -51,20 +51,22 @@
 </head>
 <body>
   <h1>Dintero Branding Generator</h1>
-  <p>Ändra inställningarna nedan för att generera en live-förhandsgranskning.</p>
+  <p>Adjust the settings below to preview how the Dintero checkout branding will look at the checkout page.</p>
 
   <label>Logos</label>
+<small>List of payment methods to include, separated by underscores. Example: <code>visa_mastercard_vipps_swish_walley</code></small>
+
   <input id="logos" type="text" value="visa_mastercard_vipps_swish_walley">
 
   <label>Variant</label>
   <select id="variant">
-    <option value="colors" selected>Colors</option>
-    <option value="mono">Mono</option>
-    <option value="darkcolors">Dark Colors</option>
-    <option value="logomark">Logomark (symboler utan text)</option>
+    <option value="colors" selected>Colors — normal full-color logos</option>
+    <option value="mono">Mono — monochrome version</option>
+    <option value="darkcolors">Dark Colors — optimized for dark backgrounds</option>
+    <option value="logomark">Logomark — simplified icons without text</option>
   </select>
 
-  <label>Färg</label>
+  <label>Color</label>
   <input id="color" type="color" value="#cecece">
 
   <label>Template</label>
