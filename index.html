@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <title>Dintero Branding Preview</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 700px;
+      margin: 2rem auto;
+      line-height: 1.6;
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: 600;
+    }
+    input, select {
+      width: 100%;
+      padding: 6px;
+      font-size: 14px;
+    }
+    input[type="color"] {
+      width: 80px;
+      height: 40px;
+      padding: 0;
+      border: none;
+      cursor: pointer;
+    }
+    #preview {
+      margin-top: 2rem;
+      text-align: center;
+      padding: 1.5rem;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+    img {
+      border: 1px solid #ccc;
+      background: transparent;
+      padding: 8px;
+      max-width: 100%;
+    }
+    code {
+      display: block;
+      margin-top: 0.5rem;
+      word-break: break-all;
+      background: #f6f6f6;
+      padding: 6px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Dintero Branding Generator</h1>
+  <p>Ändra inställningarna nedan för att generera en live-förhandsgranskning.</p>
+
+  <label>Logos</label>
+  <input id="logos" type="text" value="visa_mastercard_vipps_swish_walley">
+
+  <label>Variant</label>
+  <select id="variant">
+    <option value="colors" selected>Colors</option>
+    <option value="mono">Mono</option>
+    <option value="darkcolors">Dark Colors</option>
+    <option value="logomark">Logomark (symboler utan text)</option>
+  </select>
+
+  <label>Färg</label>
+  <input id="color" type="color" value="#cecece">
+
+  <label>Template</label>
+  <select id="template">
+    <option value="dintero_left_frame" selected>Left Frame</option>
+    <option value="dintero_top_frame">Top Frame</option>
+  </select>
+
+  <div id="preview">
+    <h2>Förhandsgranskning</h2>
+    <img id="preview-img" alt="Dintero branding" />
+    <code id="preview-url"></code>
+  </div>
+
+  <script>
+    function updatePreview() {
+      const logos = document.getElementById('logos').value.trim();
+      const variant = document.getElementById('variant').value;
+      const color = document.getElementById('color').value.replace('#', '');
+      const template = document.getElementById('template').value;
+      const width = 600; // 🔒 fast bredd
+
+      const url = `https://checkout.dintero.com/v1/branding/logos/${logos}/variant/${variant}/color/${color}/width/${width}/template/${template}.svg`;
+
+      document.getElementById('preview-img').src = url;
+      document.getElementById('preview-url').textContent = url;
+
+      // Ändra bakgrund beroende på variant
+      const previewBox = document.getElementById('preview');
+      if (variant === 'darkcolors') {
+        previewBox.style.backgroundColor = '#1a1a1a';
+        previewBox.style.color = '#fff';
+      } else {
+        previewBox.style.backgroundColor = '#fff';
+        previewBox.style.color = '#000';
+      }
+    }
+
+    document.querySelectorAll('#logos, #variant, #color, #template')
+      .forEach(el => el.addEventListener('input', updatePreview));
+
+    updatePreview();
+  </script>
+</body>
+</html>
